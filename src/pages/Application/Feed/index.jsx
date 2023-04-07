@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../../../services/api';
-import { useEffect, useState } from 'react';
-import './style.css';
 import Wrapper from '../../../components/Wrapper';
+import './style.css';
 const Feed = () => {
   const [feeds, setFeeds] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,6 +23,9 @@ const Feed = () => {
           <div key={feed._id} className="feed-item">
             <img src={feed.imgUrl} alt="feed-img" />
             <h2>{feed.title}</h2>
+            <Link to={`/users/${feed.ownerId}`}>
+              <p>{feed.ownerId}</p>
+            </Link>
           </div>
         ))}
       </div>
