@@ -6,6 +6,7 @@
     justify-content: end;
     padding: 0 15px;
     margin-bottom: 30px;
+    column-gap: 10px;
 }
 
 .list-links{
