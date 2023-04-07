@@ -8,7 +8,7 @@ const Feed = () => {
   useEffect(() => {
     api.getFeed().then((feeds) => setFeeds(feeds));
   }, []);
- console.log(feeds);
+
   return (
     <div className="feed-container">
       {feeds.map((feed) => (

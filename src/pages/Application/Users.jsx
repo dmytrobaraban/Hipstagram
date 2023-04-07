@@ -3,15 +3,29 @@ import api from '../../services/api';
 import { NavLink } from 'react-router-dom';
 
 const User = ({ user }) => {
+  const [isFollowed, setIsFollowed] = useState(user.isFollow);
 
-    return (
+  const handleToggleFollow = async () => {
+    if (isFollowed) {
+      await api.followUser(user._id);
+      setIsFollowed(false);
+    } else {
+      await api.followUser(user._id);
+      setIsFollowed(true);
+    }
+  };
+
+  return (
     <div>
       <NavLink to={`/users/${user._id}`}>Login: {user.login}</NavLink>
       Email: {user.email}
-      {user.isFollow ? <button>Unfollow</button> : <button>Follow</button>}
+      {isFollowed ? (
+        <button onClick={handleToggleFollow}>Unfollow</button>
+      ) : (
+        <button onClick={handleToggleFollow}>Follow</button>
+      )}
     </div>
-    );
-    
+  );
 };
 
 const Users = () => {
