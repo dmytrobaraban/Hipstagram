@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    height: 60px;
+    background-color: #4D88ED;
+    align-items: center;
+    justify-content: end;
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+
+.list-links{
+    display: flex;
+    align-items: center;
+}

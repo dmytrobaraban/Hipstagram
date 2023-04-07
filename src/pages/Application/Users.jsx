@@ -7,7 +7,7 @@ const User = ({ user }) => {
 
   const handleToggleFollow = async () => {
     if (isFollowed) {
-      await api.followUser(user._id);
+      await api.followUser(user._id)
       setIsFollowed(false);
     } else {
       await api.followUser(user._id);

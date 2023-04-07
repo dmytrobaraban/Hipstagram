@@ -1,0 +1,14 @@
+.feed-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.feed-item{
+    border: 1px solid #6A6262;
+    margin-bottom: 20px;
+}
+
+.feed-item img{
+    width: 400px;
+}
