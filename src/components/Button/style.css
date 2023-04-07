@@ -1,5 +1,13 @@
 .btn {
-    min-width: 200px;
-    min-height: 50px;
-    background-color: greenyellow;
+    position: absolute;
+    right: 30px;
+    width: 120px;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    padding: 7px 0;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.2s ease-in;
 }

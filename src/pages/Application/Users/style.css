@@ -28,17 +28,3 @@
     line-height: 28px;
     color: #000000;
 }
-
-.user-item button{
-    position: absolute;
-    right: 30px;
-    width: 120px;
-    font-size: 14px;
-    line-height: 16px;
-    text-align: center;
-    padding: 7px 0;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    transition: all 0.2s ease-in;
-}

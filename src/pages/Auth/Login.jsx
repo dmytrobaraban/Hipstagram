@@ -60,7 +60,7 @@ const Login = () => {
           Sign In
         </button>
       </form>
-      <div className='auth-bottom-text'>
+      <div className="auth-bottom-text">
         <span>If you not have account you can </span>
         <NavLink to="/registration">Registration</NavLink>
       </div>

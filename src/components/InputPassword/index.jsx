@@ -18,12 +18,12 @@ const InputPassword = (props) => {
     padding: '10px',
     right: '10px',
     border: 'none',
-    background: 'url(assets/f070_icon.svg) 0% 0% / 20px no-repeat',
+    background: 'url(assets/svg/f070_icon.svg) 0% 0% / 20px no-repeat',
   };
 
   const styleButtonHide = {
     ...styleButtonShow,
-    background: 'url(assets/f06e_icon.svg) 0% 0% / 20px no-repeat',
+    background: 'url(assets/svg/f06e_icon.svg) 0% 0% / 20px no-repeat',
   };
 
   const newProps = { ...props, type };

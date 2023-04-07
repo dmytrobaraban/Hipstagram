@@ -6,10 +6,6 @@
     justify-content: end;
     padding: 0 15px;
     margin-bottom: 30px;
-    column-gap: 10px;
+    column-gap: 30px;
 }
 
-.list-links{
-    display: flex;
-    align-items: center;
-}

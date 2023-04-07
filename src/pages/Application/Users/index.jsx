@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import api from '../../../services/api';
 import { NavLink } from 'react-router-dom';
 import Wrapper from '../../../components/Wrapper';
+import Button from '../../../components/Button';
 import './style.css';
 
 const DEFAULT_AVATAR = 'https://img.freepik.com/free-icon/user_318-159711.jpg';
@@ -29,21 +30,22 @@ const User = ({ user }) => {
     },
   };
 
-  return (
+  return (  
     <div className="user-item">
       <>
         <img src={avatar || DEFAULT_AVATAR} alt="avatar" />
         <NavLink to={`/users/${user._id}`}>{user.login}</NavLink>
       </>
       {isFollowed ? (
-        <button style={styleFollow.unfollow} onClick={handleToggleFollow}>
+        <Button style={styleFollow.unfollow} onClick={handleToggleFollow}>
           Unfollow
-        </button>
+        </Button>
       ) : (
-        <button style={styleFollow.follow} onClick={handleToggleFollow}>
+        <Button style={styleFollow.follow} onClick={handleToggleFollow}>
           Follow
-        </button>
+        </Button>
       )}
+      
     </div>
   );
 };
