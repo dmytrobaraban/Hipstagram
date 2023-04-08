@@ -3,6 +3,7 @@ import api from '../../../services/api';
 import { NavLink } from 'react-router-dom';
 import Wrapper from '../../../components/Wrapper';
 import Button from '../../../components/Button';
+import { useDebounce } from '../../../hooks/useDebounce';
 import './style.css';
 
 const DEFAULT_AVATAR = 'https://img.freepik.com/free-icon/user_318-159711.jpg';
@@ -30,7 +31,7 @@ const User = ({ user }) => {
     },
   };
 
-  return (  
+  return (
     <div className="user-item">
       <>
         <img src={avatar || DEFAULT_AVATAR} alt="avatar" />
@@ -45,7 +46,6 @@ const User = ({ user }) => {
           Follow
         </Button>
       )}
-      
     </div>
   );
 };
@@ -61,11 +61,28 @@ const Users = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const handleChangeSearch = useDebounce(
+    (event) => {
+      const { value } = event.target;
+      api
+        .getUsers(value)
+        .then((users) => setUsers(users))
+        .finally(() => setIsLoading(false));
+    },
+    1000,
+  );
+
   return isLoading ? (
     <h1>Loading...</h1>
   ) : (
     <Wrapper>
       <div className="users-list">
+        <div className="users-searh">
+          <input
+            placeholder="Enter user login..."
+            onChange={handleChangeSearch}
+          />
+        </div>
         {!users.length ? (
           <h1>Users not found</h1>
         ) : (

@@ -38,8 +38,8 @@ class HipsatgramApi {
     return response.data;
   }
 
-  async getUsers() {
-    const response = await this.api.get('/users');
+  async getUsers(userLogin = '') {
+    const response = await this.api.get('/users?search=' + userLogin);
     return response.data;
   }
 

@@ -3,7 +3,7 @@
     height: 60px;
     background-color: #4D88ED;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     padding: 0 15px;
     margin-bottom: 30px;
     column-gap: 30px;

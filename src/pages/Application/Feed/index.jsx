@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import api from '../../../services/api';
 import Wrapper from '../../../components/Wrapper';
 import './style.css';
-const Feed = ({ user }) => {
+const Feed = () => {
   const [feeds, setFeeds] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const DEFAULT_AVATAR =
     'https://img.freepik.com/free-icon/user_318-159711.jpg';
-  
+
   useEffect(() => {
     api
       .getFeed()

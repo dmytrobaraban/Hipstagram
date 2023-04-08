@@ -4,7 +4,7 @@ import './style.css';
 import { useLocation } from 'react-router-dom';
 import HeaderTitle from '../../components/HederTitle';
 
-const imagePath = (name) => `assets/svg/${name}.svg`;
+const imagePath = (name) => `/assets/svg/${name}.svg`;
 
 const Header = () => {
   const { pathname } = useLocation();

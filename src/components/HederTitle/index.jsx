@@ -6,6 +6,7 @@ const HeaderTitle = () => {
   const { pathname } = useLocation();
   const [title, setTitle] = useState('');
 
+
   useEffect(() => {
     switch (pathname) {
       case '/':
