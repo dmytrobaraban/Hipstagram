@@ -55,7 +55,6 @@ const User = () => {
   const isPersonalPage = useIndificate(params.userId);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
   const handleAddPost = (post) => {
     const newUser = {
       ...user,
@@ -77,7 +76,9 @@ const User = () => {
 
   return (
     <>
-      <NavLink to="/users">Back</NavLink>
+      <NavLink to="/users">
+        <img className='arrow-back' src="/assets/svg/arrow-left.svg" alt="back to users" />
+      </NavLink>
       {isPersonalPage && <UploadPost handleAddPost={handleAddPost} />}
       {!user ? (
         <h1>User not found</h1>
@@ -85,13 +86,30 @@ const User = () => {
         <Wrapper>
           <div className="user-login">{user.login}</div>
           <div className="user-info">
+            <div className="user-avatar">
+              <img src={user.avatar} alt="user-avatar" />
+            </div>
+            <div className="user-detail">
+              <p>
+                <span>{user.posts.length}</span> posts
+              </p>
+            </div>
+            <div className="user-detail">
+              <p style={{ textAlign: 'center' }}>
+                <span>{user.followersCount}</span> folowers
+              </p>
+            </div>
+            <div className="user-detail">
+              <p style={{ textAlign: 'end' }}>
+                <span>{user.followingsCount}</span> folowings
+              </p>
+            </div>
             {user.isFollow ? (
               <button>Unfollow</button>
             ) : (
               <button>Follow</button>
             )}
           </div>
-          <p>Posts:</p>
           <div className="posts">
             {user.posts.map((post) => (
               <PostCard key={post._id} post={post} />
