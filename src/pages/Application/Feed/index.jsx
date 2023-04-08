@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import api from '../../../services/api';
 import Wrapper from '../../../components/Wrapper';
 import './style.css';
-const Feed = () => {
+const Feed = ({ user }) => {
   const [feeds, setFeeds] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const DEFAULT_AVATAR =
+    'https://img.freepik.com/free-icon/user_318-159711.jpg';
+  
   useEffect(() => {
     api
       .getFeed()
@@ -14,19 +17,41 @@ const Feed = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    api.getUsers().then((users) => setUsers(users));
+  }, []);
+
+  const getAuthorLogin = (ownerId) => {
+    const user = users.find((user) => user._id === ownerId);
+    return user ? user.login : '';
+  };
+
+  const getAuthorAvatar = (ownerId) => {
+    const user = users.find((user) => user._id === ownerId);
+    return user ? user.avatar : '';
+  };
+
   return isLoading ? (
     <h1>Loading...</h1>
   ) : (
     <Wrapper>
       <div className="feed-container">
         {feeds.map((feed) => (
-          <div key={feed._id} className="feed-item">
-            <img src={feed.imgUrl} alt="feed-img" />
-            <h2>{feed.title}</h2>
-            <Link to={`/users/${feed.ownerId}`}>
-              <p>{feed.ownerId}</p>
-            </Link>
-          </div>
+          <Link to={`/users/${feed.ownerId}`}>
+            <div key={feed._id} className="feed-item">
+              <div className="owner-avatar">
+                <img
+                  src={getAuthorAvatar(feed.ownerId) || DEFAULT_AVATAR}
+                  alt="avatar"
+                />
+              </div>
+              <h3>{getAuthorLogin(feed.ownerId)}</h3>
+              <img src={feed.imgUrl} alt="feed-img" />
+              <h2>{feed.title}</h2>
+            </div>
+          </Link>
         ))}
       </div>
     </Wrapper>
