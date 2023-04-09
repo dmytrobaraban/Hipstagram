@@ -12,6 +12,7 @@
     margin: 0 auto;
     flex-direction: column;
     align-self: center;
+    width: 458px;
 }
 
 .form-header{

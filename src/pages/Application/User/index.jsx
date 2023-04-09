@@ -11,7 +11,9 @@ import './style.css';
 const UploadPost = ({ handleAddPost }) => {
   const [isOpenForm, setIsOpenForm] = useState(false);
 
-  const handleOpenForm = () => setIsOpenForm(true);
+  const handleOpenForm = () => {
+    setIsOpenForm(true);
+  };
 
   const handleCloseForm = () => setIsOpenForm(false);
 
@@ -35,18 +37,24 @@ const UploadPost = ({ handleAddPost }) => {
   };
 
   if (!isOpenForm) {
-    return <Button onClick={handleOpenForm}>Upload</Button>;
+    return (
+      <button onClick={handleOpenForm} className={'add-post'}>
+        Add post
+      </button>
+    );
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button onClick={handleCloseForm} type="button">
-        Cancel
-      </button>
-      <Input name="title" label="Title" type="text" placeholder="Title..." />
-      <Input name="image" label="Photo" type="file" placeholder="Photo..." />
-      <button type="submit">Create post</button>
-    </form>
+    <div className={`${isOpenForm ? 'modal' : ''}`}>
+      <form className="create-post" onSubmit={handleSubmit}>
+        <Input name="title" label="Title" type="text" placeholder="Title..." />
+        <Input name="image" label="Photo" type="file" placeholder="Photo..." />
+        <button type="submit">Create post</button>
+        <button onClick={handleCloseForm} type="button">
+          Cancel
+        </button>
+      </form>
+    </div>
   );
 };
 
@@ -74,12 +82,18 @@ const User = () => {
 
   if (isLoading) return <h1>Loading...</h1>;
 
+  const DEFAULT_AVATAR =
+    'https://img.freepik.com/free-icon/user_318-159711.jpg';
+
   return (
     <>
       <NavLink to="/users">
-        <img className='arrow-back' src="/assets/svg/arrow-left.svg" alt="back to users" />
+        <img
+          className="arrow-back"
+          src="/assets/svg/arrow-left.svg"
+          alt="back to users"
+        />
       </NavLink>
-      {isPersonalPage && <UploadPost handleAddPost={handleAddPost} />}
       {!user ? (
         <h1>User not found</h1>
       ) : (
@@ -87,7 +101,10 @@ const User = () => {
           <div className="user-login">{user.login}</div>
           <div className="user-info">
             <div className="user-avatar">
-              <img src={user.avatar} alt="user-avatar" />
+              <img
+                src={user.avatar ? user.avatar : DEFAULT_AVATAR}
+                alt="user-avatar"
+              />
             </div>
             <div className="user-detail">
               <p>
@@ -104,12 +121,15 @@ const User = () => {
                 <span>{user.followingsCount}</span> folowings
               </p>
             </div>
-            {user.isFollow ? (
-              <button>Unfollow</button>
-            ) : (
-              <button>Follow</button>
-            )}
+            {isPersonalPage && <UploadPost handleAddPost={handleAddPost} />}
+            {!isPersonalPage &&
+              (user.isFollow ? (
+                <button className="follow-btn">Unfollow</button>
+              ) : (
+                <button className="follow-btn">Follow</button>
+              ))}
           </div>
+
           <div className="posts">
             {user.posts.map((post) => (
               <PostCard key={post._id} post={post} />

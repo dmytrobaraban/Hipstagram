@@ -16,16 +16,23 @@ const Login = () => {
 
   useEffect(() => {
     const errors = {};
-    if (form.login.length) {
-      errors.login = null;
-    } else {
-      errors.login = 'Login required!';
-    }
-
-    if (form.password.length) {
-      errors.password = null;
-    } else {
-      errors.password = 'Password required!';
+    for (const key in form) {
+      if (key === 'login') {
+        if (!form[key].trim()) {
+          errors[key] = 'Login required!';
+        } else if (!/^[a-zA-Z0-9_]{2,30}$/.test(form[key])) {
+          errors[key] =
+            `Login must contain only letters, numbers or underscores and be between 2 and 30 characters long!`;
+        } else {
+          errors[key] = null;
+        }
+      } else if (key === 'password') {
+        if (!form[key].trim()) {
+          errors[key] = 'Password required!';
+        } else {
+          errors[key] = null;
+        }
+      }
     }
     setErrors(errors);
   }, [form]);
@@ -56,6 +63,11 @@ const Login = () => {
           onChange={(e) => handleChange('password', e.target.value)}
           error={errors.password}
         />
+        {errors && (
+          <p style={{ color: 'red' }}>
+            {errors.login ? errors.login : errors.password}
+          </p>
+        )}
         <button type="submit" className="auth-btn">
           Sign In
         </button>
