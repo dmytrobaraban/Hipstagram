@@ -3,7 +3,6 @@ import { NavLink, useParams } from 'react-router-dom';
 import api from '../../../services/api';
 import PostCard from '../../../components/PostCard';
 import { useIndificate } from '../../../hooks';
-import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 import Wrapper from '../../../components/Wrapper';
 import './style.css';
@@ -17,7 +16,7 @@ const UploadPost = ({ handleAddPost }) => {
 
   const handleCloseForm = () => setIsOpenForm(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { title, image } = e.target.elements;
     const body = {
@@ -63,6 +62,7 @@ const User = () => {
   const isPersonalPage = useIndificate(params.userId);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  
   const handleAddPost = (post) => {
     const newUser = {
       ...user,
@@ -95,7 +95,7 @@ const User = () => {
         />
       </NavLink>
       {!user ? (
-        <h1>User not found</h1>
+          <h1>User not found</h1>
       ) : (
         <Wrapper>
           <div className="user-login">{user.login}</div>

@@ -21,14 +21,18 @@ const Login = () => {
         if (!form[key].trim()) {
           errors[key] = 'Login required!';
         } else if (!/^[a-zA-Z0-9_]{2,30}$/.test(form[key])) {
-          errors[key] =
-            `Login must contain only letters, numbers or underscores and be between 2 and 30 characters long!`;
+          errors[
+            key
+          ] = `Login must contain only letters, numbers or underscores and be between 2 and 30 characters long!`;
         } else {
           errors[key] = null;
         }
       } else if (key === 'password') {
         if (!form[key].trim()) {
           errors[key] = 'Password required!';
+        } else if (!/^[a-zA-Z0-9]{8,16}$/.test(form[key])) {
+          errors[key] =
+            'password must has min 8 symbols, max 16 symbols, only digital letters and literal letters';
         } else {
           errors[key] = null;
         }

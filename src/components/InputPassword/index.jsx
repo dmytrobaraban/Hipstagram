@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import Input from '../Input';
 
-const InputPassword = (props) => {
+const InputPassword = forwardRef((props, ref) => {
   const [type, setType] = useState(props.type || 'password');
 
   const handleClick = () => {
@@ -26,7 +26,7 @@ const InputPassword = (props) => {
     background: 'url(assets/svg/f06e_icon.svg) 0% 0% / 20px no-repeat',
   };
 
-  const newProps = { ...props, type };
+  const newProps = { ...props, type, ref };
 
   return (
     <div style={style}>
@@ -38,6 +38,6 @@ const InputPassword = (props) => {
       ></button>
     </div>
   );
-};
+});
 
 export default InputPassword;

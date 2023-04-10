@@ -67,6 +67,11 @@ class HipsatgramApi {
     return response.data;
   }
 
+  async updatePassword(data) {
+    const response = await this.api.post('/auth/updatePassword', data);
+    return response.data;
+  }
+
   async followUser(userId) {
     const response = await this.api.get('/users/follow/' + userId);
     return response.data;
@@ -74,6 +79,16 @@ class HipsatgramApi {
 
   async getFeed() {
     const response = await this.api.get('/posts/feed');
+    return response.data;
+  }
+
+  async getComments(postId) {
+    const response = await this.api.get('/comments/' + postId);
+    return response.data;
+  }
+
+  async addComment(postId) {
+    const response = await this.api.get('/comments', postId);
     return response.data;
   }
 }

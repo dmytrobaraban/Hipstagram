@@ -61,16 +61,13 @@ const Users = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const handleChangeSearch = useDebounce(
-    (event) => {
-      const { value } = event.target;
-      api
-        .getUsers(value)
-        .then((users) => setUsers(users))
-        .finally(() => setIsLoading(false));
-    },
-    1000,
-  );
+  const handleChangeSearch = useDebounce((event) => {
+    const { value } = event.target;
+    api
+      .getUsers(value)
+      .then((users) => setUsers(users))
+      .finally(() => setIsLoading(false));
+  }, 1000);
 
   return isLoading ? (
     <h1>Loading...</h1>
@@ -84,7 +81,10 @@ const Users = () => {
           />
         </div>
         {!users.length ? (
-          <h1>Users not found</h1>
+          <div>
+            <img src="/assets/svg/not-found.svg" alt='not-found'/>
+            <h2>User not found</h2>
+          </div>
         ) : (
           users.map((user) => <User key={'user_' + user._id} user={user} />)
         )}

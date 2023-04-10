@@ -28,7 +28,6 @@ const Registration = () => {
     } else {
       errors.password = 'Password required!';
     }
-
     if (form.email.length) {
       errors.email = null;
     } else {

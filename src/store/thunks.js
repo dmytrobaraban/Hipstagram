@@ -36,7 +36,6 @@ export const loginThunk = (data) => {
     }
 }
 
-
 export const updateCurrentUserThunk = (data) => {
     return async (dispatch, getState) => {
         try {
@@ -50,3 +49,18 @@ export const updateCurrentUserThunk = (data) => {
     }
 }
 
+export const updatePasswordThunk = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            const updatedUserPassword = await api.updatePassword(data);
+            dispatch({
+              type: 'CURRENT_USER_UPDATE',
+              payload: updatedUserPassword,
+            });
+            toast.success('Password has been updated!', {theme: getState().ui.theme})
+        } catch(err) {
+            const { data } = err.response;
+            toast.error(data, {theme: getState().ui.theme})
+        }
+    }
+}
