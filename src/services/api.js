@@ -77,6 +77,13 @@ class HipsatgramApi {
     return response.data;
   }
 
+  async getFollowersAndFollowings(userId) {
+    const response = await this.api.get(
+      '/users/followersAndFollowing/' + userId
+    );
+    return response.data;
+  }
+
   async getFeed() {
     const response = await this.api.get('/posts/feed');
     return response.data;

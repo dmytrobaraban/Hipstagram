@@ -5,6 +5,7 @@ import PostCard from '../../../components/PostCard';
 import { useIndificate } from '../../../hooks';
 import Input from '../../../components/Input';
 import Wrapper from '../../../components/Wrapper';
+import store from '../../../store';
 import './style.css';
 
 const UploadPost = ({ handleAddPost }) => {
@@ -62,7 +63,10 @@ const User = () => {
   const isPersonalPage = useIndificate(params.userId);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  
+  const [followers, setfollowers] = useState();
+  const [isLoadingFollowers, setIsLoadingFollowers] = useState(true);
+  const [isFollow, setIsfollow] = useState(false);
+
   const handleAddPost = (post) => {
     const newUser = {
       ...user,
@@ -72,6 +76,24 @@ const User = () => {
     setUser(newUser);
   };
 
+    const handleToggleFollow = async () => {
+      if (isFollow) {
+        await api.followUser(user.id);
+        setIsfollow(false);
+      } else {
+        await api.followUser(user.id);
+        setIsfollow(true);
+      }
+    };
+
+  useEffect(() => {
+    api
+      .getFollowersAndFollowings(params.userId)
+      .then((users) => setfollowers(users))
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoadingFollowers(false));
+  }, []);
+
   useEffect(() => {
     api
       .getUserById(params.userId)
@@ -79,6 +101,16 @@ const User = () => {
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (!isLoadingFollowers) {
+        const myId = store.getState().user.user.id;
+        const follower = followers.followers;
+        for (const followed of follower) {
+          followed.id === myId ? setIsfollow(true) : setIsfollow(false);
+        }
+    }
+  }, [isLoadingFollowers, followers]);
 
   if (isLoading) return <h1>Loading...</h1>;
 
@@ -95,7 +127,7 @@ const User = () => {
         />
       </NavLink>
       {!user ? (
-          <h1>User not found</h1>
+        <h1>User not found</h1>
       ) : (
         <Wrapper>
           <div className="user-login">{user.login}</div>
@@ -123,10 +155,14 @@ const User = () => {
             </div>
             {isPersonalPage && <UploadPost handleAddPost={handleAddPost} />}
             {!isPersonalPage &&
-              (user.isFollow ? (
-                <button className="follow-btn">Unfollow</button>
+              (isFollow ? (
+                <button onClick={handleToggleFollow} className="follow-btn" style={{backgroundColor: '#FE7171'}}>
+                  Unfollow
+                </button>
               ) : (
-                <button className="follow-btn">Follow</button>
+                <button onClick={handleToggleFollow} className="follow-btn">
+                  Follow
+                </button>
               ))}
           </div>
 

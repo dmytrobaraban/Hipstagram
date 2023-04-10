@@ -56,6 +56,7 @@
     border: none;
     border-radius: 5px;
     background-color: #4D88ED;
+    transition: all 0.3s ease-in;
 }
 
 .add-post{
@@ -142,5 +143,9 @@
 }
 
 .create-post button[type="button"] {
+    background-color: #FE7171;
+}
+
+.follow-btn .unfollow {
     background-color: #FE7171;
 }
