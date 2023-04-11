@@ -39,7 +39,10 @@ const Feed = () => {
     <Wrapper>
       <div className="feed-container">
         {feeds.map((feed) => (
-          <Link to={`/users/${feed.ownerId}`}>
+          <Link
+            key={`feed ${feed.ownerId + feed.title}`}
+            to={`/users/${feed.ownerId}`}
+          >
             <div key={feed._id} className="feed-item">
               <div className="owner-avatar">
                 <img

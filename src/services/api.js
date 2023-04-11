@@ -94,8 +94,12 @@ class HipsatgramApi {
     return response.data;
   }
 
-  async addComment(postId) {
-    const response = await this.api.get('/comments', postId);
+  async addComment(postId, text) {
+    const response = await this.api.post('/comments', { postId, text });
+    return response.data;
+  }
+  async addLike(postId) {
+    const response = await this.api.get('/posts/like/' + postId);
     return response.data;
   }
 }
