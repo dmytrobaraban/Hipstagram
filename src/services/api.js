@@ -98,10 +98,7 @@ class HipsatgramApi {
     const response = await this.api.post('/comments', { postId, text });
     return response.data;
   }
-  async addLike(postId) {
-    const response = await this.api.get('/posts/like/' + postId);
-    return response.data;
-  }
+
 }
 
 export default new HipsatgramApi();

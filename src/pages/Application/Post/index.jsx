@@ -12,8 +12,7 @@ const Post = () => {
   const [comments, setComments] = useState([]);
   const [isShowLikes, setIsShowLikes] = useState(false);
   const [addedComment, setAddedComment] = useState();
-  const [isLiked, setIsLiked] = useState(false);
-
+ 
   useEffect(() => {
     api.getPostById(postId).then((data) => {
       setPost(data);
@@ -23,18 +22,6 @@ const Post = () => {
   useEffect(() => {
     api.getComments(postId).then((data) => {
       setComments(data);
-    });
-  }, []);
-
-  useEffect(() => {
-    api.addLike(postId).then((data) => {
-      setIsLiked(data.status === 'unliked' ? true : false)
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          api.addLike(postId);
-        });
     });
   }, []);
 
@@ -50,12 +37,6 @@ const Post = () => {
         setComments(data);
       });
     });
-  };
-
-  const handleToggleLike = () => {
-    api.addLike(postId);
-    isLiked ? setIsLiked(false) : setIsLiked(true);
-    api.addLike(postId);
   };
 
   const DEFAULT_AVATAR =
@@ -100,13 +81,12 @@ const Post = () => {
               <>
                 <div className="like-container">
                   <button
-                    className={`like-post ${
-                      isLiked === false ? 'unliked' : 'liked'
-                    }`}
-                    onClick={handleToggleLike}
-                  ></button>
+                    className="like-post unliked"></button>
                   {post.likes.length ? (
-                    <span className='show-likers' onClick={() => setIsShowLikes(true)}>
+                    <span
+                      className="show-likers"
+                      onClick={() => setIsShowLikes(true)}
+                    >
                       Likes :
                       {firstLikedUser && (
                         <NavLink to={`/users/${firstLikedUser._id}`}>
@@ -116,7 +96,7 @@ const Post = () => {
                       and {likes.length ? likes.length : 0} other...
                     </span>
                   ) : (
-                      <p style={{marginLeft:'20px'}}>No likes</p>
+                    <p style={{ marginLeft: '20px' }}>No likes</p>
                   )}
                 </div>
               </>
