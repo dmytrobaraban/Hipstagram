@@ -1,7 +1,7 @@
 import axios from 'axios';
 import store from '../store';
 
-const API_URL = 'http://52.3.249.107:9000';
+const API_URL = 'https://aqueous-beyond-50648.herokuapp.com';
 
 class HipsatgramApi {
   constructor() {
@@ -98,7 +98,6 @@ class HipsatgramApi {
     const response = await this.api.post('/comments', { postId, text });
     return response.data;
   }
-
 }
 
 export default new HipsatgramApi();
