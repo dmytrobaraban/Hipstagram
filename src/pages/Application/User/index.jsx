@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import api from '../../../services/api';
@@ -76,15 +77,15 @@ const User = () => {
     setUser(newUser);
   };
 
-    const handleToggleFollow = async () => {
-      if (isFollow) {
-        await api.followUser(user.id);
-        setIsfollow(false);
-      } else {
-        await api.followUser(user.id);
-        setIsfollow(true);
-      }
-    };
+  const handleToggleFollow = async () => {
+    if (isFollow) {
+      await api.followUser(user.id);
+      setIsfollow(false);
+    } else {
+      await api.followUser(user.id);
+      setIsfollow(true);
+    }
+  };
 
   useEffect(() => {
     api
@@ -104,11 +105,11 @@ const User = () => {
 
   useEffect(() => {
     if (!isLoadingFollowers) {
-        const myId = store.getState().user.user.id;
-        const follower = followers.followers;
-        for (const followed of follower) {
-          followed.id === myId ? setIsfollow(true) : setIsfollow(false);
-        }
+      const myId = store.getState().user.user.id;
+      const follower = followers.followers;
+      for (const followed of follower) {
+        followed.id === myId ? setIsfollow(true) : setIsfollow(false);
+      }
     }
   }, [isLoadingFollowers, followers]);
 
@@ -156,7 +157,11 @@ const User = () => {
             {isPersonalPage && <UploadPost handleAddPost={handleAddPost} />}
             {!isPersonalPage &&
               (isFollow ? (
-                <button onClick={handleToggleFollow} className="follow-btn" style={{backgroundColor: '#FE7171'}}>
+                <button
+                  onClick={handleToggleFollow}
+                  className="follow-btn"
+                  style={{ backgroundColor: '#FE7171' }}
+                >
                   Unfollow
                 </button>
               ) : (
