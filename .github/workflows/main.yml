@@ -5,7 +5,7 @@ name: Build and Release
 # Controls when the workflow will run
 on:
   push:
-    branches: [ "workplace" ]
+    branches: ['workplace']
   workflow_dispatch:
 
 jobs:
@@ -18,8 +18,8 @@ jobs:
         run: npm ci
 
       - name: Build the app
-        run: npm run build
-        
+        run: npm run
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
