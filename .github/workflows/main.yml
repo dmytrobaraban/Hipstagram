@@ -5,7 +5,7 @@ name: Build and Release
 # Controls when the workflow will run
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "workplace" ]
   workflow_dispatch:
 
 jobs:
